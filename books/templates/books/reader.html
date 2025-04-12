@@ -1,0 +1,18 @@
+{% extends "books/base.html" %}
+{% block content %}
+<h2>{{ book.title }}</h2>
+<p>
+{% for word in words %}
+    <span class="word" style="cursor:pointer; color:blue;">{{ word }}</span> 
+{% endfor %}
+</p>
+
+<script>
+document.querySelectorAll('.word').forEach(el => {
+    el.onclick = () => {
+        const selectedWord = el.innerText;
+        alert(`Перевод: (сюда подставляй перевод вручную или с API)`);
+    };
+});
+</script>
+{% endblock %}

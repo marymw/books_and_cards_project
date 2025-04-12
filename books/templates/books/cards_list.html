@@ -1,0 +1,11 @@
+{% extends "books/base.html" %}
+
+{% block content %}
+<h2>Мои карточки</h2>
+<ul>
+    {% for card in cards %}
+    <li>{{ card.word }} — {{ card.translation }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_card' %}">➕ Добавить новую карточку</a>
+{% endblock %}
