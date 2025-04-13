@@ -1,17 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Список книг</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav {
+        background-color: #ffaad4;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .links a {
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        margin: 0 15px;
+    }
+
+    .links a:hover {
+        text-decoration: underline;
+    }
+
+    .auth-links a {
+        color: white;
+        font-size: 14px;
+    }
+
+    .auth-links form button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        color: #333;
+    }
+
+    .book-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+        padding: 0;
+    }
+
+    .book-item {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 250px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .book-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-item a {
+        color: #333;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    .book-item a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div>
     <h1>Список книг</h1>
-    <ul>
+    <div class="book-list">
         {% for book in books %}
-            <li>
+            <div class="book-item">
                 <a href="{% url 'read_book' book.id %}">{{ book.title }}</a>
-            </li>
+            </div>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+<!-- <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход — MW</title>
+</head>
+<body>
+    <h2>Вход в аккаунт</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Войти</button>
+    </form>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — MW</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe4ec; /* розовый фон */
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #d65b7a;
+            font-size: 3em;
+            text-align: center;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #f9e4e8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #d65b7a;
+        }
+        button {
+            background-color: #d65b7a;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        button:hover {
+            background-color: #ff79a1;
+        }
+        .message {
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #d65b7a;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Вход в MW</h2>
+    
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Войти</button>
+        </form>
+        
+        <p class="message">
+            Еще нет аккаунта? <a href="{% url 'signup' %}" style="color: #d65b7a;">Зарегистрироваться</a>
+        </p>
+    </div>
+
+    <div class="back-link">
+        <a href="{% url 'home' %}">На главную страницу</a>
+    </div>
+
+</body>
+</html>

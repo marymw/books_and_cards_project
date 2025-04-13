@@ -1,0 +1,34 @@
+#translation-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  #popup-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .translatable-word {
+    cursor: pointer;
+    color: blue;
+  }
+  
+  #add-to-flashcards {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #add-to-flashcards:hover {
+    background-color: #45a049;
+  }

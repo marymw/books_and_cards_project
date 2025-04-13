@@ -1,0 +1,131 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>MW — учим английский по книгам и карточкам</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffe6f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo {
+            /* font-size: 72px;
+            color: #cc3366;
+            font-style: italic;
+            margin: 0;
+            z-index: 2; */
+            font-size: 100px; 
+            color: #d72c7e;
+            font-style: italic;
+            text-align: center;
+            margin-top: 100px;
+            /* font-family: 'Brush Script MT', cursive; */
+            word-wrap: break-word;  
+            white-space: normal;   
+            line-height: 1.1;     
+            width: 100%;         
+            box-sizing: border-box; 
+        }
+
+        .slogan {
+            font-size: 24px;
+            color: #cc3366;
+            margin: 10px 0 30px 0;
+            z-index: 2;
+        }
+
+        .auth-box {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(204, 51, 102, 0.3);
+            padding: 30px 50px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .auth-box h2 {
+            color: #cc3366;
+            margin-bottom: 20px;
+        }
+
+        .auth-box a {
+            display: inline-block;
+            margin: 10px 20px;
+            padding: 10px 20px;
+            background: #ff6699;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .auth-box a:hover {
+            background: #cc3366;
+        }
+
+        /* Декоративные сердечки и цветочки */
+        .decor {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .decor span {
+            position: absolute;
+            display: block;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            animation: float 20s linear infinite;
+        }
+
+        .decor .flower { background-image: url({% static 'images/flowers.png' %}); }
+        .decor .heart { background-image:  url({% static 'images/hearts.png' %}); }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-200px) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="decor">
+        <span class="flower" style="left: 5%; animation-delay: 0s;"></span>
+        <span class="heart" style="left: 15%; animation-delay: 3s;"></span>
+        <span class="flower" style="left: 25%; animation-delay: 6s;"></span>
+        <span class="heart" style="left: 35%; animation-delay: 1s;"></span>
+        <span class="flower" style="left: 50%; animation-delay: 4s;"></span>
+        <span class="heart" style="left: 65%; animation-delay: 7s;"></span>
+        <span class="flower" style="left: 75%; animation-delay: 2s;"></span>
+        <span class="heart" style="left: 85%; animation-delay: 5s;"></span>
+    </div>
+
+    <h1 class="logo">MW</h1>
+    <p class="slogan">учим английский по книгам и карточкам</p>
+
+    <div class="auth-box">
+        <h2>Добро пожаловать!</h2>
+        <a href="{% url 'login' %}">Войти</a>
+        <a href="{% url 'signup' %}">Создать аккаунт</a>
+    </div>
+
+</body>
+</html>

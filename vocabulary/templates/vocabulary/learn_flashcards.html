@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #ffe4ec;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+    }
+    
+    /* Контейнер для основного контента */
+    .content-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 60px); /* Учитываем высоту шапки */
+        margin: 0;
+    }
+
+    .flashcard {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        width: 300px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .flashcard:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+    }
+
+    .controls {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    button {
+        background: #ffaad4;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 12px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    button:hover {
+        background: #ff7fbf;
+    }
+</style>
+
+<div class="content-container">
+    <div>
+        <div class="flashcard" id="card">Нажми для перевода</div>
+        <div class="controls">
+            <button id="next">Следующая</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let flashcards = [];
+    let current = 0;
+    let flipped = false;
+
+    fetch("{% url 'learn_flashcards_json' %}")
+        .then(response => response.json())
+        .then(data => {
+            flashcards = data.cards;
+            if (flashcards.length > 0) {
+                document.getElementById('card').textContent = flashcards[0].word;
+            } else {
+                document.getElementById('card').textContent = "Нет карточек для изучения!";
+            }
+        });
+
+    document.getElementById('card').addEventListener('click', function() {
+        if (!flashcards.length) return;
+        flipped = !flipped;
+        this.textContent = flipped
+            ? flashcards[current].translation
+            : flashcards[current].word;
+    });
+
+    document.getElementById('next').addEventListener('click', function() {
+        if (!flashcards.length) return;
+        current = (current + 1) % flashcards.length;
+        flipped = false;
+        document.getElementById('card').textContent = flashcards[current].word;
+    });
+</script>
+{% endblock %}

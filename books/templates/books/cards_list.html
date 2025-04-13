@@ -1,6 +1,15 @@
 {% extends "books/base.html" %}
 
 {% block content %}
+{% if user.is_authenticated %}
+<p>Привет, {{ user.username }}!</p>
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Выйти</button>
+</form>
+{% else %}
+<a href="{% url 'login' %}">Войти</a>
+{% endif %}
 <h2>Мои карточки</h2>
 <ul>
     {% for card in cards %}

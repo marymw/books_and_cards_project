@@ -1,25 +1,58 @@
-<!-- {% extends 'base.html' %}
-
+{% extends "base.html" %}
 {% block content %}
-<h1>{{ book.title }}</h1>
-<p>
-    {{ book.content }}
-</p>
-{% endblock %}
- -->
+  <h1>{{ book.title }}</h1>
+  <div class="book-text">
+    {% for paragraph in paragraphs %}
+      <p>
+        {% for word in paragraph.split %}
+          <span class="translatable-word" data-word="{{ word }}">{{ word }}</span>
+        {% endfor %}
+      </p>
+    {% endfor %}
+  </div>
 
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ book.title }}</title>
-</head>
-<body>
-    <h1>{{ book.title }}</h1>
-    <p>
-        {{ book.content }}
-    </p>
-</body>
-</html>
+  <div id="translation-popup" class="popup" style="display: none; position: absolute; background: white; border: 1px solid #ccc; padding: 10px; z-index: 1000; box-shadow: 0 0 10px rgba(0,0,0,0.2); border-radius: 8px;">
+    <p id="word" style="font-weight: bold; margin: 0;"></p>
+    <p id="translation" style="margin: 5px 0;"></p>
+    <button id="add-to-flashcards">Add to Flashcards</button>
+  </div>
+  
+  <script>
+      document.querySelectorAll('.translatable-word').forEach(function(wordElement) {
+        wordElement.addEventListener('click', function(event) {
+          var word = this.getAttribute('data-word');
+  
+          fetch(`/books/translate/${word}/`)
+            .then(response => response.json())
+            .then(data => {
+              const popup = document.getElementById('translation-popup');
+              const rect = this.getBoundingClientRect();
+  
+              // Позиционируем popup над словом
+              popup.style.left = `${rect.left + window.scrollX}px`;
+              popup.style.top = `${rect.top + window.scrollY - popup.offsetHeight - 10}px`;
+              popup.style.display = 'block';
+  
+              document.getElementById('word').textContent = data.word;
+              document.getElementById('translation').textContent = data.translation;
+  
+              document.getElementById('add-to-flashcards').onclick = function() {
+                fetch(`/books/add_flashcard/${word}/`)
+                  .then(response => response.json())
+                  .then(data => {
+                    alert(data.message);
+                    popup.style.display = 'none';
+                  });
+              };
+            });
+        });
+      });
+  
+      window.addEventListener('click', function(event) {
+        const popup = document.getElementById('translation-popup');
+        if (!popup.contains(event.target) && !event.target.classList.contains('translatable-word')) {
+          popup.style.display = 'none';
+        }
+      });
+  </script>
+  {% endblock %}

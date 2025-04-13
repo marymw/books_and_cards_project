@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Flashcards</h1>
+<ul>
+  {% for card in flashcards %}
+    <li>{{ card.word }} — {{ card.translation }}</li>
+  {% empty %}
+    <li>No flashcards yet.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'add_flashcard_manual' %}">Add New Word</a> |
+<a href="{% url 'learn_flashcards_page' %}">Start Learning</a>
+{% endblock %}
+
